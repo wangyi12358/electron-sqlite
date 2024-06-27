@@ -4,6 +4,6 @@ import { Layout } from './layout'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-      <Layout />
+    <Layout />
   </React.StrictMode>
 )

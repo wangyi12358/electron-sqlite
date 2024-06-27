@@ -1,50 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
-export interface LayoutProps {
+export interface LayoutProps {}
 
-}
-
-
-const fetch = window.electron.fetch || window.fetch;
+const fetch = window.electron.fetch || window.fetch
 
 export const Layout: React.FC<LayoutProps> = () => {
   const [users, setUsers] = useState([])
 
-  useEffect(() => {
-  }, [])
+  useEffect(() => {}, [])
 
   function getUserList() {
-    console.log('fetching users');
+    console.log('fetching users')
     fetch('/user', {
-      method: "GET",
+      method: 'GET'
     })
       .then((e) => e.text())
-      .then(console.log);
+      .then(console.log)
   }
 
   function addUser() {
-    console.log('adding user');
+    console.log('adding user')
     fetch('/user', {
-      method: "POST",
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: 'John Doe',
-      }),
+        name: 'John Doe'
+      })
     })
       .then((e) => e.text())
-      .then(console.log);
-
+      .then(console.log)
   }
 
   return (
     <div>
       <h1>Layout</h1>
-      <button
-        onClick={addUser}
-      >Add User</button>
-      <button style={{ marginLeft: 16 }} onClick={() => getUserList()}>Fetch Users</button>
+      <button onClick={addUser}>Add User</button>
+      <button style={{ marginLeft: 16 }} onClick={() => getUserList()}>
+        Fetch Users
+      </button>
     </div>
-  );
-};
+  )
+}

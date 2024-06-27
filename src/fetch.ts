@@ -1,22 +1,22 @@
-import { ipcMain } from "electron";
-import type { Hono } from "hono";
+import { ipcMain } from 'electron'
+import type { Hono } from 'hono'
 
 export type FetchReturnValue = {
-  status: number;
-  statusText: string;
-  bodyUsed: boolean;
-  ok: boolean;
-  redirected: boolean;
-  type: string;
-  url: string;
-  body: string;
-};
+  status: number
+  statusText: string
+  bodyUsed: boolean
+  ok: boolean
+  redirected: boolean
+  type: string
+  url: string
+  body: string
+}
 
 const handleFetch = (app: Hono<any>) => {
-  ipcMain.handle("fetch", async (e, input: string, requestInit: RequestInit) => {
-    console.log("fetch", input, requestInit);
-    const response = await app.request(input, requestInit);
-    const { status, statusText, bodyUsed, ok, redirected, type, url } = response;
+  ipcMain.handle('fetch', async (e, input: string, requestInit: RequestInit) => {
+    console.log('fetch', input, requestInit)
+    const response = await app.request(input, requestInit)
+    const { status, statusText, bodyUsed, ok, redirected, type, url } = response
     return {
       status,
       statusText,
@@ -25,9 +25,9 @@ const handleFetch = (app: Hono<any>) => {
       redirected,
       type,
       url,
-      body: await response.text(),
-    } as FetchReturnValue;
-  });
-};
+      body: await response.text()
+    } as FetchReturnValue
+  })
+}
 
-export default handleFetch;
+export default handleFetch

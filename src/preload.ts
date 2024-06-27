@@ -1,24 +1,24 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
-import { contextBridge, ipcRenderer } from "electron";
-import type { FetchReturnValue } from "./fetch";
+import { contextBridge, ipcRenderer } from 'electron'
+import type { FetchReturnValue } from './fetch'
 
-contextBridge.exposeInMainWorld("electron", {
+contextBridge.exposeInMainWorld('electron', {
   fetch: async (input: string, requestInit: RequestInit) => {
-    const res = (await ipcRenderer.invoke("fetch", input, requestInit)) as FetchReturnValue;
-    const { status, statusText, bodyUsed, ok, redirected, type, url, body } = res;
+    const res = (await ipcRenderer.invoke('fetch', input, requestInit)) as FetchReturnValue
+    const { status, statusText, bodyUsed, ok, redirected, type, url, body } = res
     const json = () => {
       return new Promise((resolve, reject) => {
         try {
-          resolve(JSON.parse(body));
+          resolve(JSON.parse(body))
         } catch (err) {
-          reject(err);
+          reject(err)
         }
-      });
-    };
+      })
+    }
     const text = () => {
-      return Promise.resolve(body || "");
-    };
+      return Promise.resolve(body || '')
+    }
     return {
       status,
       statusText,
@@ -29,8 +29,8 @@ contextBridge.exposeInMainWorld("electron", {
       url,
       body,
       json,
-      text,
-    };
+      text
+    }
   },
-  versions: process.versions,
-});
+  versions: process.versions
+})
