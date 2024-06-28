@@ -1,4 +1,4 @@
-import type { Config } from 'drizzle-kit'
+import type { Config } from 'drizzle-kit';
 
 export default {
   schema: './src/api/schema.ts',
@@ -7,4 +7,4 @@ export default {
   dbCredentials: {
     url: './sqlite.db'
   }
-} as Config
+} as Config;
